@@ -18,9 +18,12 @@
   Finally, export `plantGenerator` as a function.
 */
 
+const faker = require('@faker-js/faker');
+
 function plantGenerator() {
   return {
-    name: "daylily",
-    color: "green",
+    name: "faker.internet.userName()",
+    color: "faker.commerce.color()",
   };
 }
+module.exports = plantGenerator;
