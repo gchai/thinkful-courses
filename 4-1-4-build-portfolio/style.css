@@ -19,6 +19,21 @@ h3 {
 /* Header */
 header {
   text-align: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.title{
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: row;
+}
+
+.items{
+  display: flex;
+  text-align:left;
+  flex-direction: column;
 }
 
 /* Containers */
