@@ -481,3 +481,6 @@ General Code Organization:
 - Start by completing the required HTML elements and then proceed to work on the javascript functions. CSS changes can be made last. Follow the order of the user stories.
 - If you get stuck, take a careful look at the resources that we provide. If you are still stuck, ask a friend or a mentor for help.
 - Read the user stories and tests carefully.
+
+# Reference
+[Link to the original repo](https://github.com/Thinkful-Ed/js-dev-final-capstone-starter-simon-says)
