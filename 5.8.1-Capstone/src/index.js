@@ -113,8 +113,9 @@ function startButtonHandler() {
 function padHandler(event) {
   const { color } = event.target.dataset;
   if (!color) return;
-
-  // TODO: Write your code here.
+  const pad = pads.find((pad) => pad.color === color);
+  pad.sound.play();
+  checkPress(color);
   return color;
 }
 
@@ -294,7 +295,16 @@ function playHumanTurn() {
  *
  */
 function checkPress(color) {
-  // TODO: Write your code here.
+  playerSequence.push(color);
+  const index = playerSequence.length - 1;
+  const remainingPresses = computerSequence.length - playerSequence.length;
+  setText(statusSpan, `Player has ${remainingPresses} left out of a total of ${computerSequence.length}`);
+
+  if (playerSequence[index] !== computerSequence[index]){
+    resetGame("Ya dun goof'd");
+  } else if (remainingPresses === 0){
+    checkRound();
+  }
 }
 
 /**
@@ -313,7 +323,14 @@ function checkPress(color) {
  */
 
 function checkRound() {
-  // TODO: Write your code here.
+  if (playerSequence.length == maxRoundCount){
+    resetGame("Success message");
+  } else {
+    roundCount += 1;
+    playerSequence = [];
+    setText(statusSpan, "Keep going!");
+    setTimeout(playComputerTurn, 1000);
+  }
 }
 
 /**
