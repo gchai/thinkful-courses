@@ -30,26 +30,32 @@ let roundCount = 0; // track the number of rounds that have been played so far
  *
  */
 
+import sound1 from "../assets/simon-says-sound-1.mp3";
+import sound2 from "../assets/simon-says-sound-2.mp3";
+import sound3 from "../assets/simon-says-sound-3.mp3";
+import sound4 from "../assets/simon-says-sound-4.mp3";
+
+
  const pads = [
   {
     color: "red",
     selector: document.querySelector(".js-pad-red"),
-    sound: new Audio("../assets/simon-says-sound-1.mp3"),
+    sound: new Audio(sound1),
   },
   {
     color: "green",
     selector: document.querySelector(".js-pad-green"),
-    sound: new Audio("../assets/simon-says-sound-2.mp3"),
+    sound: new Audio(sound2),
   },
   {
     color: "blue",
     selector: document.querySelector(".js-pad-blue"),
-    sound: new Audio("../assets/simon-says-sound-3.mp3"),
+    sound: new Audio(sound3),
   },
   {
     color: "yellow",
     selector: document.querySelector(".js-pad-yellow"),
-    sound: new Audio("../assets/simon-says-sound-4.mp3"),
+    sound: new Audio(sound4),
   },
 ];
 
@@ -81,12 +87,9 @@ startButton.addEventListener("click", startButtonHandler);
 function startButtonHandler() {
   setLevel();
   roundCount += 1;
-
   startButton.classList.add("hidden");
   statusSpan.classList.remove("hidden");
-
   playComputerTurn();
-
   return { startButton, statusSpan };
 }
 
@@ -169,16 +172,16 @@ function setLevel(level = 1) {
  * getRandomItem([1, 2, 3, 4]) //> returns 1
  */
 function getRandomItem(collection) {
-  // if (collection.length === 0) return null;
-  // const randomIndex = Math.floor(Math.random() * collection.length);
-  // return collection[randomIndex];
+  if (collection.length === 0) return null;
+  const randomIndex = Math.floor(Math.random() * collection.length);
+  return collection[randomIndex]
 }
 
 /**
  * Sets the status text of a given HTML element with a given a message
  */
 function setText(element, text) {
-  // TODO: Write your code here.
+  element.textContent = text;
   return element;
 }
 
@@ -196,7 +199,10 @@ function setText(element, text) {
  */
 
 function activatePad(color) {
-  // TODO: Write your code here.
+  const pad = pads.find((pad) => pad.color === color);
+  pad.selector.classList.add("activated");
+  pad.sound.play();
+  setTimeout(() => {pad.selector.classList.remove("activated");}, 500);
 }
 
 /**
@@ -214,7 +220,9 @@ function activatePad(color) {
  */
 
 function activatePads(sequence) {
-  // TODO: Write your code here.
+  sequence.forEach((color, index) => {
+    setTimeout(() => {activatePad(color);}, (index + 1) * 600);
+  });
 }
 
 /**
@@ -241,7 +249,12 @@ function activatePads(sequence) {
  * sequence.
  */
  function playComputerTurn() {
-  // TODO: Write your code here.
+  padContainer.classList.add("unclickable");
+  setText(statusSpan, "It's the computer's turn...");
+  setText(heading, `Round ${roundCount} of ${maxRoundCount}`);
+
+  computerSequence.push(getRandomItem(pads).color);
+  activatePads(computerSequence);
 
   setTimeout(() => playHumanTurn(roundCount), roundCount * 600 + 1000); // 5
 }
@@ -254,7 +267,8 @@ function activatePads(sequence) {
  * 2. Display a status message showing the player how many presses are left in the round
  */
 function playHumanTurn() {
-  // TODO: Write your code here.
+  padContainer.classList.remove("unclickable");
+  setText(statusSpan, `Player has ${computerSequence.length - playerSequence.length} presses left.`);
 }
 
 /**
