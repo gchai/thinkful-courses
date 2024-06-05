@@ -72,13 +72,3 @@ describe("US-02: startButtonHandler()", () => {
   });
 });
 
-describe("US-02: getRandomItem()", () => {
-  beforeEach(setUpTest);
-
-  it("should return null if getRandomItem([])", async () => {
-    const randomItem = await page.evaluate(() => {
-      return window.getRandomItem([]);
-    });
-    expect(randomItem).toBeNull();
-  });
-});

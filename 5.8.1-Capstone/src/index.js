@@ -58,7 +58,7 @@ let roundCount = 0; // track the number of rounds that have been played so far
  */
 
 padContainer.addEventListener("click", padHandler);
-// TODO: Add an event listener `startButtonHandler()` to startButton.
+startButton.addEventListener("click", startButtonHandler);
 
 /**
  * EVENT HANDLERS
@@ -79,7 +79,13 @@ padContainer.addEventListener("click", padHandler);
  *
  */
 function startButtonHandler() {
-  // TODO: Write your code here.
+  setLevel();
+  roundCount += 1;
+
+  startButton.classList.add("hidden");
+  statusSpan.classList.remove("hidden");
+
+  playComputerTurn();
 
   return { startButton, statusSpan };
 }
@@ -135,7 +141,16 @@ function padHandler(event) {
  *
  */
 function setLevel(level = 1) {
-  // TODO: Write your code here.
+  const roundCalc = {
+    1: 8,
+    2: 14,
+    3: 20,
+    4: 31,
+  };
+
+  if (!roundCalc[level]) return "Please enter level 1, 2, 3, or 4";
+
+  return roundCalc[level];
 }
 
 /**
