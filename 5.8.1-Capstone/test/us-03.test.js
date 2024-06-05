@@ -26,7 +26,6 @@ describe("US-03: getRandomItem()", () => {
   });
 });
 
-
 describe("US-03: setText()", () => {
   beforeEach(setUpTest);
 
