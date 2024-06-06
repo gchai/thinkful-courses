@@ -30,32 +30,32 @@ let roundCount = 0; // track the number of rounds that have been played so far
  *
  */
 
-import sound1 from "../assets/simon-says-sound-1.mp3";
-import sound2 from "../assets/simon-says-sound-2.mp3";
-import sound3 from "../assets/simon-says-sound-3.mp3";
-import sound4 from "../assets/simon-says-sound-4.mp3";
+const bgmusic = new Audio("../assets/unreal-super-hero-3.mp3");
+function loopBackgroundMusic(){
+  bgmusic.loop = true;
+  bgmusic.play();
+}
 
-
- const pads = [
+const pads = [
   {
     color: "red",
     selector: document.querySelector(".js-pad-red"),
-    sound: new Audio(sound1),
+    sound: new Audio("../assets/simon-says-sound-1.mp3"),
   },
   {
     color: "green",
     selector: document.querySelector(".js-pad-green"),
-    sound: new Audio(sound2),
+    sound: new Audio("../assets/simon-says-sound-2.mp3"),
   },
   {
     color: "blue",
     selector: document.querySelector(".js-pad-blue"),
-    sound: new Audio(sound3),
+    sound: new Audio("../assets/simon-says-sound-3.mp3"),
   },
   {
     color: "yellow",
     selector: document.querySelector(".js-pad-yellow"),
-    sound: new Audio(sound4),
+    sound: new Audio("../assets/simon-says-sound-4.mp3"),
   },
 ];
 
@@ -90,6 +90,7 @@ function startButtonHandler() {
   startButton.classList.add("hidden");
   statusSpan.classList.remove("hidden");
   playComputerTurn();
+  loopBackgroundMusic();
   return { startButton, statusSpan };
 }
 
@@ -153,7 +154,7 @@ function setLevel(level = 1) {
   };
 
   if (!roundCalc[level]) return "Please enter level 1, 2, 3, or 4";
-
+  maxRoundCount = roundCalc[level];
   return roundCalc[level];
 }
 
@@ -343,14 +344,15 @@ function checkRound() {
  * 3. Reset `roundCount` to an empty array
  */
 function resetGame(text) {
-  // TODO: Write your code here.
+  computerSequence = [];
+  playerSequence = [];
+  roundCount = 0;
 
-  // Uncomment the code below:
-  // alert(text);
-  // setText(heading, "Simon Says");
-  // startButton.classList.remove("hidden");
-  // statusSpan.classList.add("hidden");
-  // padContainer.classList.add("unclickable");
+  alert(text);
+  setText(heading, "Simon Says");
+  startButton.classList.remove("hidden");
+  statusSpan.classList.add("hidden");
+  padContainer.classList.add("unclickable");
 }
 
 /**
