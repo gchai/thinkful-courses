@@ -30,7 +30,7 @@ let roundCount = 0; // track the number of rounds that have been played so far
  *
  */
 
-const bgmusic = new Audio("../5.8.1-Capstone/assets/unreal-super-hero-3.mp3");
+const bgmusic = new Audio("../web-dev-501/5.8.1-Capstone/assets/unreal-super-hero-3.mp3");
 function loopBackgroundMusic(){
   bgmusic.loop = true;
   bgmusic.play();
@@ -40,22 +40,22 @@ const pads = [
   {
     color: "red",
     selector: document.querySelector(".js-pad-red"),
-    sound: new Audio("../5.8.1-Capstone/assets/simon-says-sound-1.mp3"),
+    sound: new Audio("../web-dev-501/5.8.1-Capstone/assets/simon-says-sound-1.mp3"),
   },
   {
     color: "green",
     selector: document.querySelector(".js-pad-green"),
-    sound: new Audio("../5.8.1-Capstone/assets/simon-says-sound-2.mp3"),
+    sound: new Audio("../web-dev-501/5.8.1-Capstone/assets/simon-says-sound-2.mp3"),
   },
   {
     color: "blue",
     selector: document.querySelector(".js-pad-blue"),
-    sound: new Audio("../5.8.1-Capstone/assets/simon-says-sound-3.mp3"),
+    sound: new Audio("../web-dev-501/5.8.1-Capstone/assets/simon-says-sound-3.mp3"),
   },
   {
     color: "yellow",
     selector: document.querySelector(".js-pad-yellow"),
-    sound: new Audio("../5.8.1-Capstone/assets/simon-says-sound-4.mp3"),
+    sound: new Audio("../web-dev-501/5.8.1-Capstone/assets/simon-says-sound-4.mp3"),
   },
 ];
 
