@@ -19,7 +19,7 @@ function App() {
         setToDos(toDoFromAPI);
       } catch (error) {
         if (error.name === "AbortError"){
-          console.log("Aboirted")
+          console.log("Aborted")
         } else{
           throw error;
         }
