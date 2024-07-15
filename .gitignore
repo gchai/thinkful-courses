@@ -157,3 +157,5 @@ dist
 .pnp.*
 
 .qualified-attach.json
+
+.vscode/
