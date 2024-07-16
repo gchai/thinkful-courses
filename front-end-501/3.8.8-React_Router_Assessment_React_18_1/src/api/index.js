@@ -23,6 +23,7 @@ async function deletePostDelegate(postId, signal) {
 }
 
 async function fetchUserWithPostsDelegate(userId, signal) {
+  console.log("fetchUSerWithPostsDelegate");
   const url = `https://jsonplaceholder.typicode.com/users/${userId}`;
   const response = await fetch(url, { signal });
   if (response.status !== 200) {
@@ -58,6 +59,7 @@ async function fetchUsers(signal) {
 }
 
 async function fetchPostsForUser(userId, signal) {
+  console.log("FetchingPostForUser");
   const url = `https://jsonplaceholder.typicode.com/posts?userId=${userId}`;
   const response = await fetch(url, { signal });
   return response.json();
