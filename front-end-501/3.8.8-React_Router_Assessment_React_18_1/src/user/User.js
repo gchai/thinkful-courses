@@ -4,11 +4,12 @@ import { fetchUserWithPosts } from "../api";
 import PostList from "./PostList";
 import PostsNav from "./PostsNav";
 import ErrorMessage from "../common/ErrorMessage";
+import { useParams} from 'react-router-dom'
 
 export const User = () => {
   const [user, setUser] = useState({ posts: [] });
   const [error, setError] = useState(undefined);
-  const userId = 1; // TODO: This ID will need to be pulled from parameters.
+  const userId = useParams().userId;
 
   useEffect(() => {
     const abortController = new AbortController();
