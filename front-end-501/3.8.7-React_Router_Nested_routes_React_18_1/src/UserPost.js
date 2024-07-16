@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import users from "./data.json";
+import User from "./User";
 
 export const UserPost = ({ posts = [] }) => {
   const { postId } = useParams();
@@ -20,9 +21,9 @@ export const UserPost = ({ posts = [] }) => {
   }
 
   const post = user.posts.find((post) => `${post.id}` === postId);
-
   return (
     <article>
+      <User id={user.id}/>
       <h3>{post.title}</h3>
       <p>{post.body}</p>
     </article>
