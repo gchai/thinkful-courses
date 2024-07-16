@@ -4,7 +4,7 @@ import { fetchUserWithPosts } from "../api";
 import PostList from "./PostList";
 import PostsNav from "./PostsNav";
 import ErrorMessage from "../common/ErrorMessage";
-import { useParams} from 'react-router-dom'
+import { useParams, Link} from 'react-router-dom'
 
 export const User = () => {
   const [user, setUser] = useState({ posts: [] });
@@ -26,11 +26,12 @@ export const User = () => {
     return (
       <ErrorMessage error={error}>
         <p>
-          <a>Return Home</a>
+        <Link to="/">Return Home</Link>
         </p>
       </ErrorMessage>
     );
   }
+  console.log(user, "HEre")
   return (
     <section className="container">
       <PostsNav />
