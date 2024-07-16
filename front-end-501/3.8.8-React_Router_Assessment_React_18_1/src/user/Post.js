@@ -1,20 +1,24 @@
 import React from "react";
 
 import { deletePost } from "../api";
+import { useParams, useNavigate} from 'react-router-dom';
 
 import NoPostSelectedMessage from "./NoPostSelectedMessage";
 
 export const Post = ({ posts }) => {
-  const postId = 1; // TODO: This ID will need to be pulled from parameters.
+  const postId = useParams().postId;
+  const navigate = useNavigate();
   const post = posts.find((post) => post.id === Number(postId));
 
   const handleDelete = async (id) => {
     const result = window.confirm("Are you sure you want to delete this post?");
     if (result) {
       await deletePost(id);
-      // TODO: After the post is deleted, send the user to the home page.
+      navigate('/')
     }
   };
+
+  //  const post = {"title":"Foo", "body":"testpost"}
 
   if (post) {
     return (
