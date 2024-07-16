@@ -17,6 +17,7 @@ import NoPostSelectedMessage from "./NoPostSelectedMessage";
 */
 
 export const PostList = ({ posts }) => {
+  posts = [{"id":"1", "userId":"2", "post":{"title":"Foo", "body":"testpost"}}]
   const postLinks = posts.map((post) => (
     <PostLink key={post.id} userId={post.userId} post={post} />
   ));

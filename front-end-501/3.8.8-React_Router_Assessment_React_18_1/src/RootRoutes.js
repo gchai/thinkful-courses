@@ -1,6 +1,10 @@
 import React from 'react'
 import CardList from "./home/CardList";
 import User from "./user/User";
+import PostList from './user/PostList';
+import UserProfile from './user/UserProfile';
+import NotFound from './common/NotFound';
+import {Routes, Route} from 'react-router-dom';
 
 function RootRoutes() {
       /*
@@ -19,10 +23,19 @@ function RootRoutes() {
     The <UserProfile /> component should show on the following route:
     /users/:userId
   */
+  // const Ping = () => console.log("Test") 
+
   return (
     <>
-        <User />
-        <CardList /> 
+        <Routes>
+          <Route path="/" element ={<CardList/>}/>
+          <Route path="/users/:userId/posts" element={<PostList/>}/>
+          <Route path="/users/:userId" element={<>
+            <UserProfile/>
+            <User/>
+          </>}/>
+          <Route path="*" element={<NotFound />}/>
+        </Routes>
     </>
   )
 }
