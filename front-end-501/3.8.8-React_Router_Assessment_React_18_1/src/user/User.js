@@ -4,7 +4,7 @@ import { fetchUserWithPosts } from "../api";
 import PostList from "./PostList";
 import PostsNav from "./PostsNav";
 import ErrorMessage from "../common/ErrorMessage";
-import { useParams, Link} from 'react-router-dom'
+import { useParams, Link, Routes, Route} from 'react-router-dom'
 
 export const User = () => {
   const [user, setUser] = useState({ posts: [] });
@@ -20,7 +20,6 @@ export const User = () => {
     return () => abortController.abort();
   }, [userId]);
 
-  // TODO: Change the link below to go back to the home page.
 
   if (error) {
     return (
@@ -31,7 +30,7 @@ export const User = () => {
       </ErrorMessage>
     );
   }
-  console.log(user, "HEre")
+  // console.log("Test",user)
   return (
     <section className="container">
       <PostsNav />
@@ -40,18 +39,20 @@ export const User = () => {
         <h2 className="mb-3">{user.name}</h2>
         <ul className="nav nav-tabs">
           <li className="nav-item">
-            <a className="nav-link">Profile</a>
+            <Link to={`/users/${user.id}`} className="nav-link">Profile</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link">Posts</a>
+            <Link to={`/users/${user.id}/posts`} className="nav-link">Posts</Link>
           </li>
         </ul>
 
         {user.id ? (
           <div className="p-4 border border-top-0">
             {/* TODO: Change to display sub route content */}
-            <PostList posts={user.posts} />
-            <UserProfile user={user} />
+            <Routes>
+              <Route path={`/posts/*`} element={<PostList posts={user.posts}/>}/>
+              <Route path={`/`} element={<UserProfile user={user}/>}/>
+            </Routes>
           </div>
         ) : (
           <div className="p-4 border border-top-0">
