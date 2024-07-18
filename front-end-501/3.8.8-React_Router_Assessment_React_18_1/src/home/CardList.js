@@ -31,7 +31,6 @@ export const CardList = () => {
     <Card key={user.id} user={user} />
   )) : null;
 
-
   return (
     <main className="container">
       <section className="row">{list}</section>
