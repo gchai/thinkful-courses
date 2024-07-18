@@ -3,6 +3,7 @@ import React from "react";
 import Post from "./Post";
 import PostLink from "./PostLink";
 import NoPostSelectedMessage from "./NoPostSelectedMessage";
+import {useParams, useResolvedPath, Routes, Route} from 'react-router-dom';
 
 /*
   TODO: Update the below so that the components show on the appropriate route.
@@ -16,8 +17,8 @@ import NoPostSelectedMessage from "./NoPostSelectedMessage";
   /users/:userId/posts/:postId
 */
 
+
 export const PostList = ({ posts }) => {
-  posts = [{"id":"1", "userId":"2", "post":{"title":"Foo", "body":"testpost"}}]
   const postLinks = posts.map((post) => (
     <PostLink key={post.id} userId={post.userId} post={post} />
   ));
@@ -28,8 +29,11 @@ export const PostList = ({ posts }) => {
         <ul className="list-group">{postLinks}</ul>
       </div>
       <div className="col-9">
-        <NoPostSelectedMessage />
-        <Post posts={posts} />
+        {/* <view>{console.log(posts)}</view> */}
+        <Routes>
+          <Route path="/" element={<NoPostSelectedMessage />} />
+          <Route path="/:postId" element={<Post posts={posts} />} />
+        </Routes>
       </div>
     </div>
   );
