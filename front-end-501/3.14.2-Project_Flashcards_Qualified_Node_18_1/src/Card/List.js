@@ -61,7 +61,7 @@ function CardList() {
               Edit
             </button>
             <button type="button" className="btn btn-danger" onClick={() => deleteHandler(card.id, "card")}>
-              <i class="bi bi-trash-fill"></i> Delete
+              <i className="bi bi-trash-fill"></i> Delete
             </button>
           </div>
         </div>
@@ -86,16 +86,16 @@ function CardList() {
         <h1>{deck.name}</h1>
         <p>{deck.description}</p>
         <button type="button" className="btn btn-secondary" onClick={() => navigate("edit")}>
-          <i class="bi bi-pencil-square"></i> Edit
+          <i className="bi bi-pencil-square"></i> Edit
         </button>
         <button type="button" className="btn btn-primary" onClick={() => navigate("study")}>
-          <i class="bi bi-book-fill"></i> Study
+          <i className="bi bi-book-fill"></i> Study
         </button>
         <button type="button" className="btn btn-primary" onClick={() => navigate("cards/new")}>
-          <i class="bi bi-plus-lg"></i> Add Cards
+          <i className="bi bi-plus-lg"></i> Add Cards
         </button>
         <button type="button" className="btn btn-danger" onClick={() => deleteHandler(id, "deck")}>
-          <i class="bi bi-trash-fill"></i> Delete
+          <i className="bi bi-trash-fill"></i> Delete
         </button>
         <h2>Cards:</h2>
         {list}

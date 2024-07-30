@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { readDeck, readCard, updateCard } from "../utils/api";
 import Breadcrumb from "../Layout/Breadcrumb";
 import CardForm from "./Form";
@@ -9,6 +9,8 @@ function EditCard() {
   const [card, setCard] = useState({});
   const [deck, setDeck] = useState([{}]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
 
   const initialFormState = {
     front: "",
@@ -55,11 +57,16 @@ function EditCard() {
     return () => abortController.abort();
   }, [cardId, deck.cards]);
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    updateCard(formData);
-    window.location = `/decks/${id}`;
-  };
+    const abortController = new AbortController();
+    try{
+      await updateCard(formData, abortController.signal);
+      navigate(`/decks/${id}`)
+    } catch (error) {
+      console.error(`Error message: ${error}`)
+    }
+  }
 
   if (error) {
     return <p>{`Error message: ${error}`}</p>;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { createCard, readDeck } from "../utils/api";
 import Breadcrumb from "../Layout/Breadcrumb";
 import CardForm from "./Form";
@@ -8,6 +8,7 @@ function AddCard() {
   const { id } = useParams();
   const [deck, setDeck] = useState([{}]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const initFormState = {
     front: "",
@@ -27,12 +28,16 @@ function AddCard() {
       });
   }, [id]);
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    createCard(id, formData);
-    setFormData({ ...initFormState });
-    window.location = `/decks/${id}`;
-  };
+    const abortController = new AbortController();
+    try{
+      await createCard(id, formData, abortController.signal);
+      navigate(`/decks/${id}`)
+    } catch (error) {
+      console.error(`Error message: ${error}`)
+    }
+  }
 
   if (error) {
     return <p>{`Error message: ${error}`}</p>;
