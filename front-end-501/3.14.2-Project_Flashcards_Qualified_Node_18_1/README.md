@@ -318,7 +318,3 @@ The Edit Card screen has the following features:
 - If the user clicks on either **Save** or **Cancel**, the user is taken to the Deck screen.
 
 **Note:** In addition to needing to pass the tests and requirements in the instructions here, please review the Rubric Requirements for the human-graded part of this project in your Thinkful curriculum page.
-
-- 
-
--
