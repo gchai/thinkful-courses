@@ -38,7 +38,7 @@ function Deck({ id, deckName, deckDescription, length }) {
               <i className="bi bi-trash-fill"></i> Delete
             </button>
           </div>
-          <div class="card-footer text-body-secondary text-left">
+          <div className="card-footer text-body-secondary text-left">
             {length} {length === 1 ? "card" : "cards"}
           </div>
         </div>

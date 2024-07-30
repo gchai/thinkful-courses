@@ -19,12 +19,16 @@ function AddDeck() {
     });
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    createDeck(formData);
-    setFormData({ ...initialFormState });
-    window.location = "/";
-  };
+    const abortController = new AbortController();
+    try{
+      await createDeck(formData, abortController.signal);
+      backHandler()
+    } catch (error) {
+      console.error(`Error message: ${error}`)
+    }
+  }
 
   const backHandler = () => {
     navigate("/");

@@ -46,11 +46,17 @@ function EditDeck() {
       [target.name]: target.value,
     });
   };
-  const submitHandler = (event) => {
+
+  const submitHandler = async (event) => {
     event.preventDefault();
-    updateDeck(formData);
-    window.location = `/decks/${id}`;
-  };
+    const abortController = new AbortController();
+    try{
+      await updateDeck(formData, abortController.signal);
+      backHandler()
+    } catch (error) {
+      console.error(`Error message: ${error}`)
+    }
+  }
 
   const backHandler = () => {
     navigate(`/decks/${id}`);
