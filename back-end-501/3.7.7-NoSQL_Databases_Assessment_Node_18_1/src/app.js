@@ -6,18 +6,20 @@ const weatherRouter = require("./weather/weather.router");
 const app = express();
 app.use(express.json());
 
-mongoose.set("strictQuery", true);
+mongoose.set('strictQuery', true);
 
+/*
 // note: it's only necessary to connect to MongoDB if you are working on you local machine.
 // to connect, uncomment the code below and add the DATABASE_URL in the .env file.
 mongoose
-  .connect(process.env.DATABASE_URL, {
-    useNewUrlParser: true,
-  })
-  .then(() => {
-    console.log("Connected to MongoDB!");
-  })
-  .catch((error) => console.error(error.message));
+    .connect(process.env.DATABASE_URL, {
+        useNewUrlParser: true
+    })
+    .then(() => {
+        console.log("Connected to MongoDB!")
+    })
+    .catch(error => console.error(error.message));
+*/
 
 app.use("/weather", weatherRouter);
 
