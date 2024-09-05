@@ -23,8 +23,7 @@ function hasValidFields(req, res, next) {
 }
 
 async function listAverageRatingByOwner(req, res, next) {
-  // your solution here
-  res.json({ data: {} });
+  res.json({ data: await service.listAverageRatingByOwner() });
 }
 
 async function averageRating(req, res, next) {
@@ -42,12 +41,8 @@ async function count(req, res, next) {
 }
 
 async function create(req, res, next) {
-  const newRestaurant = ({
-    restaurant_name,
-    address,
-    cuisine,
-    rating,
-  } = req.body.data);
+  const newRestaurant = ({ restaurant_name, address, cuisine, rating } =
+    req.body.data);
   const createdRestaurant = await service.create(newRestaurant);
   res.status(201).json({ data: createdRestaurant });
 }

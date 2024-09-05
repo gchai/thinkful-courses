@@ -20,13 +20,25 @@ function destroy(restaurant_id) {
   return knex(tableName).where({ restaurant_id }).del();
 }
 
-function list() {
-  return knex(tableName).select("*");
+async function list() {
+  const data = await knex("restaurants as r")
+    .join("owners as o", "r.owner_id", "o.owner_id")
+    .select("r.restaurant_name", "o.owner_name", "o.email");
+
+  return data;
 }
 
-function listAverageRatingByOwner() {
-  // your solution here
-  return [];
+async function listAverageRatingByOwner() {
+  const data = await knex("restaurants as r")
+    .join("owners as o", "r.owner_id", "o.owner_id")
+    .select("o.owner_name")
+    .avg("r.rating as avg")
+    .groupBy("o.owner_name");
+
+  data.forEach((item) => {
+    item.avg = parseFloat(item.avg);
+  });
+  return data;
 }
 
 function read(restaurant_id) {
