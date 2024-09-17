@@ -13,16 +13,15 @@ async function customerExists(req, res, next) {
   next({ status: 404, message: `Customer id not found: ${customerId}` });
 }
 
-function read(req, res) {
+async function read(req, res) {
   // Complete the implementation of this method.
-
-  res.json({ data: {} });
+  res.status(200).json({ data: res.locals.customer });
 }
 
 async function create(req, res) {
   // Complete the implementation of this method.
-
-  res.json({ data: {} });
+  const data = await service.create(req.body.data);
+  res.status(201).json({ data });
 }
 
 // Make sure exports are correct.
