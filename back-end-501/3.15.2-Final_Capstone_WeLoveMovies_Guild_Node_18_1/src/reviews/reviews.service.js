@@ -1,42 +1,52 @@
-const db = require("../db/connection");
+const knex = require("../db/connection");
+const mapProperties = require("../utils/map-properties");
 
-const tableName = "reviews";
+const fetchCriticDetails = mapProperties({
+  preferred_name: "critic.preferred_name",
+  surname: "critic.surname",
+  organization_name: "critic.organization_name",
+});
 
-async function destroy(reviewId) {
-  // TODO: Write your code here
-  
+async function read(review_id) {
+  return knex("reviews as r")
+    .join("critics as c", "c.critic_id", "r.critic_id")
+    .select("c.*", "r.*")
+    .where({ review_id })
+    .first()
+    .then(fetchCriticDetails);
 }
 
-async function list(movie_id) {
-  // TODO: Write your code here
-  
+async function getCriticReview(reviewId) {
+  const result = await knex("reviews as r")
+    .join("critics as c", "r.critic_id", "c.critic_id")
+    .select("*")
+    .where({ review_id: reviewId })
+    .first();
+
+  const updatedReview = fetchCriticDetails(result);
+  return updatedReview;
 }
 
-async function read(reviewId) {
-  // TODO: Write your code here
-  
+function update(updatedReview) {
+  return knex("reviews as r")
+    .join("critics as c", "r.critic_id", "c.critic_id")
+    .select("c.*", "r.*")
+    .where({ review_id: updatedReview.review_id })
+    .update(updatedReview, "*");
 }
 
-async function readCritic(critic_id) {
-  return db("critics").where({ critic_id }).first();
+function destroy(review_id) {
+  return knex("reviews").where({ review_id }).del();
 }
 
-async function setCritic(review) {
-  review.critic = await readCritic(review.critic_id);
-  return review;
-}
-
-async function update(review) {
-  return db(tableName)
-    .where({ review_id: review.review_id })
-    .update(review, "*")
-    .then(() => read(review.review_id))
-    .then(setCritic);
+function list() {
+  return knex("reviews").select("*");
 }
 
 module.exports = {
+  update,
+  getCriticReview,
+  read,
   destroy,
   list,
-  read,
-  update,
 };
