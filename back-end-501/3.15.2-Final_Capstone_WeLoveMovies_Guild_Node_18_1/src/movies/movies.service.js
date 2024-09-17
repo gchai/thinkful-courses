@@ -18,12 +18,7 @@ async function list(is_showing) {
 }
 
 async function read(movie_id) {
-  async function read(movie_id) {
-    return db("movies")
-      .select("movies.*")
-      .where({ "movies.movie_id": movie_id })
-      .first();
-  }
+  // TODO: Add your code here
   
 }
 
