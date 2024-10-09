@@ -12,11 +12,24 @@ class Queue {
   }
 
   enqueue(value) {
-    // your solution here
+    const newNode = new Node(value);
+    if (this.first) {
+      this.last.next = newNode;
+    } else {
+      this.first = newNode;
+    }
+    this.last = newNode;
   }
 
   dequeue() {
-    // your solution here
+    if (this.first) {
+        const del = this.first;
+        this.first = del.next;
+        if (del === this.last) {
+            this.last = null;
+        }
+        return del.value;
+    }
   }
 }
 
