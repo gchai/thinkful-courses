@@ -8,14 +8,18 @@ class Stack {
   constructor() {
     this.linkedList = new LinkedList();
   }
-
-  push(value) {}
-
-  pop() {}
-
-  peek() {}
-
-  isEmpty() {}
+  push(value) {
+    return this.linkedList.insertAtHead(value);
+  }
+  pop() {
+    return this.linkedList.remove((node, index) => index === 0);
+  }
+  peek() {
+    return this.linkedList.head.value;
+  }
+  isEmpty() {
+    return this.linkedList.head === null;
+  }
 }
 
 module.exports = Stack;

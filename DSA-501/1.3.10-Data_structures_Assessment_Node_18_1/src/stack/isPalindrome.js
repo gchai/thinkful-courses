@@ -14,11 +14,24 @@
 const Stack = require("../stack/stack");
 
 function isPalindrome(text) {
-  const cleanText = text.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
-
-  // TODO: Write an O(n) algorithm that uses a stack to determine whether the given input text is palindrome or not.
-
-  return false;
+  let cleanText = text.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  if (cleanText.length === 0) return false;
+  const cleanStack = new Stack();
+  let mid = Math.floor(cleanText.length / 2);
+  if (cleanText.length % 2) {
+    cleanText = cleanText.slice(0, mid) + cleanText.slice(mid + 1);
+  }
+  for (let i = 0; i < cleanText.length; i++) {
+    if (i < mid) {
+      cleanStack.push(cleanText[i]);
+    }
+    if (i >= mid) {
+      if (cleanStack.pop() !== cleanText[i]) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 module.exports = isPalindrome;
