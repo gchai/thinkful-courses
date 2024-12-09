@@ -14,7 +14,7 @@
     "marked": "4.2.4",
     "mobx": "6.7.0",
     "mobx-react": "7.6.0",
-    "nanoid": "4.0.0",
+    "nanoid": "5.0.9",
     "prop-types": "15.8.1",
     "react": "18.2.0",
     "react-cookie": "4.1.1",
